@@ -26,7 +26,7 @@ function draw() {
   background(220);
 
   // Draw the board
-  line(width/2, 0, width/2, height);
+  line(width / 2, 0, width / 2, height);
 
   // Draw the puck
   rectMode(CENTER);
@@ -50,7 +50,7 @@ function draw() {
   if (keyIsDown(90)) { // 90 is "Z"
     leftY += playerSpeed;
   }
-  
+
   // Ensure the paddle doesn't leave the screen
   if (leftY < 0) {
     leftY = 0;
@@ -73,7 +73,7 @@ function draw() {
   if (puck.y < 0 || puck.y > height) {
     puck.vy *= -1;
   }
-  
+
   // Check if puck is hitting a paddle
   if (puck.x < playerWidth && puck.y > leftY && puck.y < leftY + playerHeight) {
     puck.vx *= -1;
@@ -81,14 +81,21 @@ function draw() {
   if (puck.x > width - playerWidth && puck.y > rightY && puck.y < rightY + playerHeight) {
     puck.vx *= -1;
   }
-  
+
   // Check if a player scored
   if (puck.x > width) {
-    text("right +1", 100, 100);
+    text("Left player scores a point!", 100, 100);
+    leftScore++
     noLoop();
   }
   if (puck.x < 0) {
-    text("left +1", 100, 100);
+    text("Right player scores a point!", 100, 100);
+    rightScore++
     noLoop();
   }
+
+
+  textSize(24);
+  text("Left Player Score: " + leftScore, 10, 25);
+  text("Right Player Score: " + rightScore, 310, 25);
 }
